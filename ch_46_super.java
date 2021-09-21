@@ -7,7 +7,7 @@ class Base1 {
 
     Base1(int x) {
         number = 10;
-        System.out.println("I am an overloaded constructor with value of x as: " + x);
+        System.out.println("I am an overloaded constructor of base with value of x as: " + x);
     }
 
     public void print() {

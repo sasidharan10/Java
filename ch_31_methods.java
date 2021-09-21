@@ -2,7 +2,7 @@ public class ch_31_methods {
     static int logic(int x, int y){
         int z;
         if(x>y)
-            z = x+y;
+            z = x-y;
         else 
             z=y-x;
         return z;

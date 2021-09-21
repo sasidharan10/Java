@@ -33,7 +33,7 @@ public class ch_49_dynamic_method {
 
         obj.showTime(); // only methods from base can be called
         obj.on(); // overridden method is called
-        // obj.music(); Not Allowed
+        // obj.music(); // Not Allowed
 
         System.out.println(obj.i);
     }

@@ -11,5 +11,4 @@ public class ch_15_problem {
         String str1="hey <|guys|>!!! thank you guys";
         System.out.println(""+str1.replace("<|guys|>", "people"));
     }
-    
 }
