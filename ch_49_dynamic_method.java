@@ -47,6 +47,6 @@ public class ch_49_dynamic_method {
  * 
  * we cannot access methods of class Smartphone because
  * 
- * data members camot be overridden.
+ * data members cannot be overridden.
  * 
  */
