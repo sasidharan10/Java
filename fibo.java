@@ -1,8 +1,8 @@
 public class fibo {
     public static void main(String[] args) {
-        System.out.println(fibo(8));
+        System.out.println(fib(8));
     }
-    static int fibo(int n)
+    static int fib(int n)
     {
         int a=0,b=1,c;
         if(n==0)
