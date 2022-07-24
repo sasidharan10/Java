@@ -1,25 +1,33 @@
 import java.util.Scanner;
 
 public class practice {
+    public static void update(int matrix[][],int row,int col)
+    {
+        for(int i=0;i<8;i++)
+            matrix[row][i]=-1;
+        for(int j=0;j<8;j++)
+            matrix[j][col]=-1;
+    }
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int arr[]=new int[6];
-        for(int i=0;i<arr.length;i++)
-        {
-            arr[i]=sc.nextInt();
+        
+    }
+    public int GetBuildingCount(int input1,int[][] input2) {
+        int row=0;
+        int col=0;
+        int matrix[][]=new int[8][8];
+        Array
+        for (int i = 0; i < input; i++) {
+            row=input2[i][0];
+            col=input2[i][1];
+            update(matrix, row, col);
         }
-        int sum=0;
         int count=0;
-        for(int i=0;i<arr.length;i++)
-        {
-            if(arr[i]%2==0 && arr[i]!=0)
-            {
-                sum+=arr[i];
-                count++;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if(matrix[i][j]==-1)
+                    count++;
             }
         }
-        double avg=sum/count;
-        System.out.println(avg);
-        sc.close();
+        System.out.println(count);
     }
 }

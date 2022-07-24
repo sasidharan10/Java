@@ -4,7 +4,7 @@ public class Add {
 		int a=10;
 		int b=20; 
 		String name="sasi";
-		name="raju";
+		name="dharan";
 		System.out.println(name);
 		System.out.println("Sum : "+(a+b));
 		System.out.println(b);
