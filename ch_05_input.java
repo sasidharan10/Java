@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class ch_05_input {
     public static void main(String[] args) {
-        
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a Character : ");
-        char ch= sc.next().charAt(0);
+        char ch = sc.next().charAt(0);
         System.out.println("Character : " + ch);
         System.out.println("Enter an Integer : ");
         int a = sc.nextInt();
@@ -24,7 +24,7 @@ public class ch_05_input {
         String str = sc.nextLine();
         System.out.println("String : " + str);
         System.out.println("Enter something (check if input is integer) : ");
-        boolean b=sc.hasNextInt();
+        boolean b = sc.hasNextInt();
         System.out.println(b);
         sc.close();
     }
