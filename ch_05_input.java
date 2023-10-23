@@ -25,7 +25,7 @@ public class ch_05_input {
         System.out.println("String : " + str);
         System.out.println("Enter something (check if input is integer) : ");
         boolean b = sc.hasNextInt();
-        System.out.println(b);
+        System.out.println("Integer?: " + b);
         sc.close();
     }
 }
