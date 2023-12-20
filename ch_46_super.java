@@ -44,6 +44,10 @@ public class ch_46_super {
     }
 }
 /*
+
+* When object is created for derived class, base class constructor will be called first(if exixts)
+  and then, derived class constructor will be called.
+
  * "super" keyword is used to overcome method overriding
  * we can use 'super' keyword to invoke base class methods or data members when
  * they have same name as in derived. We can also use 'super()' which will

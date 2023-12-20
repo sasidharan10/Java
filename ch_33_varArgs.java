@@ -13,4 +13,10 @@ public class ch_33_varArgs {
         System.out.println(add(2, 3, 4));
         System.out.println(add(4, 5, 6));
     }
-}
+};
+
+/*
+ * You can pass any number of arguments of the specified type when calling the method. 
+   The arguments are treated as an array within the method.
+
+ */

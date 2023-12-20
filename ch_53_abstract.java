@@ -30,7 +30,8 @@ public class ch_53_abstract {
  * Java requires us to extend it if we want to access it.
  * It can include abstract and non-abstract methods. 
  * If a class includes abstract methods, then the class itself must be declared abstract.
-
+ * Abstract class can contain normal methods with its implementation also (but should include atleast 1 
+   abstract method).
 
  * Abstract method : 
 

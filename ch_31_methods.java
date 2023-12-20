@@ -18,8 +18,8 @@ public class ch_31_methods {
         c = logic(a, b);
         System.out.println(a + " "+ b);
         System.out.println("difference: "+c);
-        int a1 = 2;
-        int b1 = 1;
+        int a1 = 25;
+        int b1 = 56;
         int c1;
         c1 = logic(a1, b1);
         System.out.println("difference: "+c1);

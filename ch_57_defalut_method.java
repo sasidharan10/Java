@@ -25,13 +25,14 @@ public class ch_57_defalut_method {
 }
 
 /*
- * 
- * default methods help to add methods with definintions inside interface.
- * 
+
+
+ * default methods help to add methods with definitions inside interface.
  * private methods inside interface can only be used by other methods of that
- * interface.
- * 
+   interface. The use of private methods, is to act as helper methods for
+   default methods.
+   
  * If default method has 1 more definition in its derived class, then it will be
- * overridden.
- * 
+   overridden.
+
  */

@@ -11,11 +11,11 @@ public class ch_27_array {
         b = new int[3]; // object created (memory allocated)
         b[0] = 10;
         int[] c = { 1, 2, 3, 4, 5 };
-        System.out.println("array : ");
+        System.out.println("\narray : ");
         for (int i = 0; i < c.length; i++) {
             System.out.print(c[i]+" ");
         }
-        System.out.println("2D Array : ");
+        System.out.println("\n2D Array : ");
         int [][]d ={{1,2},{3,4}};
         for (int i = 0; i < d.length; i++) {
                 for (int j = 0; j < d[i].length; j++) { 

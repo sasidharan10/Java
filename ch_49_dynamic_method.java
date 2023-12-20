@@ -40,13 +40,11 @@ public class ch_49_dynamic_method {
 }
 
 /*
- * 
+
  * here 'Phone obj' means only reference is created. now 'Phone obj = new
- * SmartPhone();' means object is created for base class Smartphone, only
- * reference is made for 'Phone'.
- * 
+   SmartPhone();' means object is created for base class Smartphone, only
+   reference is made for 'Phone'.
  * we cannot access methods of class Smartphone because
- * 
- * data members cannot be overridden.
- * 
+   data members cannot be overridden.
+
  */
