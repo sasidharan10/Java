@@ -16,7 +16,7 @@ class MySmartPhone implements MyCamera {
     }
 }
 
-public class ch_57_defalut_method {
+public class ch_57_default_method {
     public static void main(String[] args) {
         MySmartPhone ms = new MySmartPhone();
         ms.record4KVideo();
