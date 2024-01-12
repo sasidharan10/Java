@@ -18,7 +18,22 @@ public class ch_04_literals {
         System.out.println("double: " + d1);
         System.out.println("String: " + str);
         System.out.println("boolean: " + a);
-        Integer iy = 56;  // wrapper class
-        System.out.println("Integer: " + iy);
+        System.out.println("\nWrapper Class used in Collection framework: ");
+        Integer it = 56; // wrapper class
+        Byte bt = 12;
+        Short st = 23;
+        Long lt = 34L;
+        Character ct = 'D';
+        Float ft = 3435.7878F;
+        Double dt = 765.9678;
+        Boolean bb = false;
+        System.out.println("\nInteger: " + it);
+        System.out.println("Byte: " + bt);
+        System.out.println("Short: " + st);
+        System.out.println("Long: " + lt);
+        System.out.println("Character: " + ct);
+        System.out.println("Float: " + ft);
+        System.out.println("Double: " + dt);
+        System.out.println("Boolean: " + bb);
     }
 }

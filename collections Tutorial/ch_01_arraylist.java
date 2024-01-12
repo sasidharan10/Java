@@ -4,6 +4,12 @@ public class ch_01_arraylist {
 
     public static void main(String[] args) {
         ArrayList<Integer> al = new ArrayList<>();
+        ArrayList<Integer> temp = new ArrayList<>();
+        Queue<Integer> q = new LinkedList<>();
+
+        q.add(1);
+        q.add(2);
+
         // ArrayList with capacity
         al.add(1);
         al.add(2);
@@ -11,6 +17,12 @@ public class ch_01_arraylist {
 
         // add 100 at index 1
         al.add(1, 100);
+        System.out.println(al);
+
+        // Add whole collection (needs to be of same data type)
+        temp.add(20);
+        al.addAll(temp);
+        al.addAll(q);
         System.out.println(al);
 
         // access element at index 0
@@ -56,6 +68,20 @@ public class ch_01_arraylist {
         // is empty
         System.out.println(bl.isEmpty());
 
+        // Checks equality of 2 ArrayList
+        System.out.println(al.equals(bl));
+
+        // checks if a element is present in ArrayList
+        System.out.println(al.contains(1));
+
+        // checks whether all elements in collection bl is present in al
+        System.out.println(al.containsAll(bl));
+
+        // Object[] arr = al.toArray();  // to convert it to array
+
+        // returns into string
+        System.out.println(al.toString());
+
         System.out.println("\nWays to Iterate ArrayList: ");
         System.out.println("\nUsing Loop: ");
         for (int i = 0; i < al.size(); i++) {
@@ -72,6 +98,12 @@ public class ch_01_arraylist {
         while (it.hasNext()) {
             System.out.print(it.next() + ", ");
         }
+
+        // ArrayList's Foreach:
+        System.out.print("\n\nForEach: ");
+        al.forEach((a) -> {
+            System.out.print(a + ", ");
+        });
 
     }
 }
