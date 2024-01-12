@@ -10,6 +10,7 @@ public class sorting_2d_arr {
         };
 
         Arrays.sort(twoDArray, (a, b) -> Integer.compare(a[0], b[0]));
+        // Arrays.sort(twoDArray, (a, b) -> Integer.compare(b[0], a[0]));  // for reverse
         for (int[] is : twoDArray) {
             for (int is2 : is) {
                 System.out.print(is2 + " ");
