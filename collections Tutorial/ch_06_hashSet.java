@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ch_06_hastset {
+public class ch_06_hashSet {
     public static void main(String[] args) {
         HashSet<Integer> hs = new HashSet<>();
         HashSet<Integer> temp = new HashSet<>();
@@ -13,7 +13,7 @@ public class ch_06_hastset {
         hs.add(3);
         hs.add(4);
 
-        // print the queue
+        // print the Set
         System.out.println(hs);
 
         // remove(element), we have to specify the element, not the index
@@ -29,16 +29,16 @@ public class ch_06_hastset {
         temp.add(1);
         temp.add(2);
 
-        // Checks equality of 2 Queue
+        // Checks equality of 2 Set
         System.out.println(hs.equals(temp));
 
-        // checks if a element is present in Queue
+        // checks if a element is present in Set
         System.out.println(hs.contains(1));
 
         // checks whether all elements in collection bl is present in al
         System.out.println(hs.containsAll(temp));
 
-        System.out.println("\nWays to Iterate Priority Queue: ");
+        System.out.println("\nWays to Iterate Priority Set: ");
 
         System.out.println("\nUsing Iterator: ");
         Iterator<Integer> it = hs.iterator();
@@ -59,7 +59,7 @@ public class ch_06_hastset {
  * - The underlying data structure for HashSet is Hashtable.
  * - As it implements the Set Interface, duplicate values are not allowed.
  * - Objects that you insert in HashSet are not guaranteed to be inserted in the
- * same order.
+ *   same order.
  * - Objects are inserted based on their hash code.
  * - NULL elements are allowed in HashSet.
  * - Element insertion, deletion, search takes O(1) TC.

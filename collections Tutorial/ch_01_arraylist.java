@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ch_01_arraylist {
+public class ch_01_arrayList {
 
     public static void main(String[] args) {
         ArrayList<Integer> al = new ArrayList<>();
@@ -104,6 +104,5 @@ public class ch_01_arraylist {
         al.forEach((a) -> {
             System.out.print(a + ", ");
         });
-
     }
 }

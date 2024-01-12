@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ch_04_priority_queue {
+public class ch_04_priorityQueue {
     public static void main(String[] args) {
         // Queue<Integer> pq = new PriorityQueue<>();
 
