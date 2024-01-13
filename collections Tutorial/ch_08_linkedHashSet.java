@@ -1,9 +1,9 @@
 import java.util.*;
 
-public class ch_07_treeSet {
+public class ch_08_linkedHashSet {
     public static void main(String[] args) {
-        TreeSet<Integer> ts = new TreeSet<>();
-        TreeSet<Integer> temp = new TreeSet<>();
+        LinkedHashSet<Integer> ts = new LinkedHashSet<>();
+        LinkedHashSet<Integer> temp = new LinkedHashSet<>();
 
         // add elements to the set
         ts.add(4);
@@ -38,7 +38,7 @@ public class ch_07_treeSet {
         // checks whether all elements in collection temp is present in ts
         System.out.println("containsAll(): " + ts.containsAll(temp));
 
-        System.out.println("\nWays to Iterate Tree Set: ");
+        System.out.println("\nWays to Iterate LinkedHashSet Set: ");
 
         System.out.println("\nUsing Iterator: ");
         Iterator<Integer> it = ts.iterator();
@@ -56,12 +56,9 @@ public class ch_07_treeSet {
 
 /*
  * 
- * - Java TreeSet class maintains ascending order.
- * - Java TreeSet class contains unique elements only like HashSet.
- * - Java TreeSet class doesn't allow null elements.
- * - search, remove, and add consume O(log(N)) time.
- * - TreeSet is being implemented using a binary search tree, which is
- * self-balancing
- * just like a Red-Black Tree.
+ * - Java LinkedHashSet class contains unique elements only like HashSet.
+ * - Java LinkedHashSet class provides all optional set operations and permits
+ * null elements.
+ * - Java LinkedHashSet class maintains insertion order.
  * 
  */

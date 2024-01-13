@@ -44,7 +44,7 @@ public class ch_04_priorityQueue {
         // checks if a element is present in Queue
         System.out.println(pq.contains(1));
 
-        // checks whether all elements in collection bl is present in al
+        // checks whether all elements in collection temp is present in pq
         System.out.println(pq.containsAll(temp));
 
         System.out.println("\nWays to Iterate Priority Queue: ");

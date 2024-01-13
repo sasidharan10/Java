@@ -35,10 +35,10 @@ public class ch_06_hashSet {
         // checks if a element is present in Set
         System.out.println(hs.contains(1));
 
-        // checks whether all elements in collection bl is present in al
+        // checks whether all elements in collection temp is present in hs
         System.out.println(hs.containsAll(temp));
 
-        System.out.println("\nWays to Iterate Priority Set: ");
+        System.out.println("\nWays to Iterate Hash Set: ");
 
         System.out.println("\nUsing Iterator: ");
         Iterator<Integer> it = hs.iterator();

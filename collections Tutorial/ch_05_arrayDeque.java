@@ -51,7 +51,7 @@ public class ch_05_arrayDeque {
         // checks if a element is present in Queue
         System.out.println(dq.contains(1));
 
-        // checks whether all elements in collection bl is present in al
+        // checks whether all elements in collection temp is present in dq
         System.out.println(dq.containsAll(temp));
 
         System.out.println("\nWays to Iterate ArrayDeque: ");
