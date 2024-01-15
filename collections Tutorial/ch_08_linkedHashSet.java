@@ -55,10 +55,10 @@ public class ch_08_linkedHashSet {
 }
 
 /*
- * 
- * - Java LinkedHashSet class contains unique elements only like HashSet.
- * - Java LinkedHashSet class provides all optional set operations and permits
- * null elements.
- * - Java LinkedHashSet class maintains insertion order.
- * 
- */
+
+- Java LinkedHashSet class contains unique elements only like HashSet.
+- Java LinkedHashSet class provides all optional set operations and permits
+  null elements.
+- Java LinkedHashSet class maintains insertion order.
+
+*/

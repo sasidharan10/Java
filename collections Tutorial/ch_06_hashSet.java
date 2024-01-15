@@ -63,6 +63,6 @@ public class ch_06_hashSet {
  * - Objects are inserted based on their hash code.
  * - NULL elements are allowed in HashSet.
  * - Element insertion, deletion, search takes O(1) TC.
- * - Its literally same as Unordered_Set<> in c++.
+ * - Its literally same as unordered_set<> in c++.
  * 
  */

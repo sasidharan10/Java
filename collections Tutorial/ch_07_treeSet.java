@@ -55,13 +55,12 @@ public class ch_07_treeSet {
 }
 
 /*
- * 
- * - Java TreeSet class maintains ascending order.
- * - Java TreeSet class contains unique elements only like HashSet.
- * - Java TreeSet class doesn't allow null elements.
- * - search, remove, and add consume O(log(N)) time.
- * - TreeSet is being implemented using a binary search tree, which is
- * self-balancing
- * just like a Red-Black Tree.
- * 
+ 
+- Java TreeSet class maintains ascending order.
+- Java TreeSet class contains unique elements only like HashSet.
+- Java TreeSet class doesn't allow null elements.
+- search, remove, and add consume O(log(N)) time.
+- TreeSet is being implemented using a binary search tree, which is
+  self-balancing just like a Red-Black Tree.
+ 
  */
