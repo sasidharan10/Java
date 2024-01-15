@@ -1,27 +1,31 @@
 import java.util.*;
 
 public class dummy {
-    public static int minSteps(String s, String t) {
-        int[] mp = new int[26];
-        // initializes 0 by default
-        int n = s.length();
+    public static List<List<String>> groupAnagrams(String[] strs) {
+        int n = strs.length;
+        HashMap<String, ArrayList<String>> mp = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            mp[s.charAt(i) - 'a']++;
-            mp[t.charAt(i) - 'a']--;
-        }
-        int cnt = 0;
-        for (int it : mp) {
-            if (it < 0) {
-                cnt += -(it);
+            String temp = strs[i];
+            char[] charArray = temp.toCharArray();
+            Arrays.sort(charArray);
+            temp = new String(charArray);
+            if (!mp.containsKey(temp)) {
+                mp.put(temp, new ArrayList<>());
             }
+            mp.get(temp).add(strs[i]);
         }
-        return cnt;
+        List<List<String>> ans = new ArrayList<>();
+
+        for (Map.Entry<String, ArrayList<String>> it : mp.entrySet()) {
+            ans.add(it.getValue());
+        }
+        return ans;
     }
 
     public static void main(String[] args) {
-        String str = "leetcode", t = "practice";
-        System.out.print("Minimum Number of Steps to Make Two Strings Anagram: ");
-        System.out.print(minSteps(str, t));
+        String[] nums = { "eat", "tea", "tan", "ate", "nat", "bat" };
+        System.out.print("Result: ");
+        System.out.print(groupAnagrams(nums));
     }
 
 }
