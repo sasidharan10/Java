@@ -1,30 +1,57 @@
 import java.util.*;
 
 public class dummy {
-    public static boolean uniqueOccurrences(int[] arr) {
-        int n = arr.length;
-        HashMap<Integer, Integer> mp = new HashMap();
-        HashSet<Integer> set = new HashSet();
-        for (int i = 0; i < n; i++) {
-            if (!mp.containsKey(arr[i]))
-                mp.put(arr[i], 1);
-            else {
-                mp.replace(arr[i], mp.get(arr[i]) + 1);
-            }
-        }
-        for (Map.Entry<Integer, Integer> it : mp.entrySet()) {
-            if (set.contains(it.getValue()))
-                return false;
+    public static boolean isUnique(String s, String t)
+    {
+        int n = s.length();
+        int m = t.length();
+        int[] mp = new int[26];
+
+        for (int i = 0; i < n; i++)
+        {
+            int idx = s.charAt(i) - 'a';
+            if (mp[idx] == 0)
+                mp[idx]++;
             else
-                set.add(it.getValue());
+                return false;
+        }
+        for (int i = 0; i < m; i++)
+        {
+            int idx = t.charAt(i) - 'a';
+            if (mp[idx] == 0)
+                mp[idx]++;
+            else
+                return false;
         }
         return true;
     }
+    public static int solve(int ind, int n, String res, List<String> arr)
+    {
+        if (ind == n)
+            return res.length();
+        int notTake = Integer.MIN_VALUE, take = Integer.MIN_VALUE;
+        if (!isUnique(res, arr.get(ind)))
+        {
+            notTake = solve(ind + 1, n, res, arr);
+        }
+        else
+        {
+            notTake = solve(ind + 1, n, res, arr);
+            take = solve(ind + 1, n, res + arr.get(ind), arr);
+        }
+        return Math.max(take, notTake);
+    }
+
+    public static int maxLength(List<String> arr) {
+        int n = arr.size();
+        return solve(0, n, "", arr);
+    }
 
     public static void main(String[] args) {
-        int[] nums = { -3, 0, 1, -3, 1, 1, 1, -3, 10, 0 };
+        String[] nums = { "cha", "r", "act", "ers" };
+        List<String> arr = new ArrayList<>(Arrays.asList(nums));
         System.out.print("Result: ");
-        System.out.print(uniqueOccurrences(nums));
+        System.out.print(maxLength(arr));
     }
 
 }
