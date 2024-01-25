@@ -1,50 +1,38 @@
 import java.util.*;
 
 public class dummy {
-    public static boolean isUnique(String s, String t)
-    {
-        int n = s.length();
-        int m = t.length();
-        int[] mp = new int[26];
-
-        for (int i = 0; i < n; i++)
-        {
-            int idx = s.charAt(i) - 'a';
-            if (mp[idx] == 0)
-                mp[idx]++;
-            else
-                return false;
+    public static int solve(int ind, int val, int n, List<Integer> nums) {
+        if (ind == n) {
+            return Integer.bitCount(val);
         }
-        for (int i = 0; i < m; i++)
-        {
-            int idx = t.charAt(i) - 'a';
-            if (mp[idx] == 0)
-                mp[idx]++;
-            else
-                return false;
-        }
-        return true;
-    }
-    public static int solve(int ind, int n, String res, List<String> arr)
-    {
-        if (ind == n)
-            return res.length();
         int notTake = Integer.MIN_VALUE, take = Integer.MIN_VALUE;
-        if (!isUnique(res, arr.get(ind)))
-        {
-            notTake = solve(ind + 1, n, res, arr);
-        }
-        else
-        {
-            notTake = solve(ind + 1, n, res, arr);
-            take = solve(ind + 1, n, res + arr.get(ind), arr);
+        if ((val & nums.get(ind)) != 0) {
+            notTake = solve(ind + 1, val, n, nums);
+        } else {
+            notTake = solve(ind + 1, val, n, nums);
+            take = solve(ind + 1, val | nums.get(ind), n, nums);
         }
         return Math.max(take, notTake);
     }
 
     public static int maxLength(List<String> arr) {
         int n = arr.size();
-        return solve(0, n, "", arr);
+        List<Integer> nums = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            Set<Character> st = new HashSet<>();
+            for (char ch : arr.get(i).toCharArray()) {
+                st.add(ch);
+            }
+            if (st.size() != arr.get(i).length())
+                continue;
+            int val = 0;
+            for (char ch : arr.get(i).toCharArray()) {
+                val = val | (1 << (ch - 'a'));
+            }
+            nums.add(val);
+        }
+        int m = nums.size();
+        return solve(0, 0, m, nums);
     }
 
     public static void main(String[] args) {
