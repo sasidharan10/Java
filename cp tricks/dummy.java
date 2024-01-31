@@ -2,30 +2,32 @@ import java.util.*;
 
 public class dummy {
 
-    public static int subarraySum(int[] nums, int k) {
-        int n = nums.length;
-        HashMap<Integer, Integer> mp = new HashMap<>();
-        mp.put(0, 1);
-        int cnt = 0;
-        int cumSum = 0;
-        for (int i = 0; i < n; i++) {
-            cumSum += nums[i];
-            if (mp.containsKey(cumSum - k)) {
-                cnt += mp.get(cumSum - k);
+    public static int[] dailyTemperatures(int[] temperatures) {
+        int n = temperatures.length;
+        // if (n == 1)
+        // return new int[1]={0};
+        int[] ans = new int[n];
+        Stack<Integer> st = new Stack<>();
+        for (int i = n - 1; i >= 0; i--) {
+            while (!st.isEmpty() && temperatures[i] >= temperatures[st.peek()]) {
+                st.pop();
             }
-            if (mp.containsKey(cumSum))
-                mp.replace(cumSum, mp.get(cumSum) + 1);
-            else
-                mp.put(cumSum, 1);
+            if (st.isEmpty()) {
+                ans[i] = 0;
+            } else {
+                ans[i] = st.peek() - i;
+            }
+            st.push(i);
         }
-        return cnt;
+        return ans;
     }
 
     public static void main(String[] args) {
-        int[] nums = { 1, 2, 3 };
-        int k = 3;
+        int[] nums = {73, 74, 75, 71, 69, 72, 76, 73};
         System.out.print("Result: ");
-        System.out.print(subarraySum(nums, k));
+        String str = Arrays.toString(dailyTemperatures(nums));
+        // Lsit<Integer> ans = new ArrayList<>(dailyTemperatures(nums)) ;
+        System.out.print(str);
     }
 
 }
