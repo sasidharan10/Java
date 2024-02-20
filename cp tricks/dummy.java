@@ -1,59 +1,58 @@
 import java.util.*;
 
 public class dummy {
-    public static List<Integer> majorityElement(int[] nums) {
-        int n = nums.length;
-        int el1 = Integer.MIN_VALUE, el2 = Integer.MIN_VALUE;
-        int cnt1 = 0, cnt2 = 0;
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == el1) {
-                cnt1++;
-            } else if (cnt1 == 0 && nums[i] != el2) {
-                cnt1 = 1;
-                el1 = nums[i];
-            } else if (nums[i] == el2) {
-                cnt2++;
-            } else if (cnt2 == 0 && nums[i] != el1) {
-                cnt2 = 1;
-                el2 = nums[i];
-            } else {
-                cnt1--;
-                cnt2--;
-            }
+
+    public static int furthestBuilding(int[] heights, int bricks, int ladders) {
+        int n = heights.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int ind = 0;
+        for (; ind < n - 1; ind++) {
+            if (heights[ind + 1] <= heights[ind])
+                continue;
+
+            int diff = heights[ind + 1] - heights[ind];
+            if (bricks >= diff) {
+                bricks -= diff;
+                pq.offer(diff);
+            } else if (ladders > 0) {
+                if (!pq.isEmpty()) {
+                    int max_past_brick = pq.peek();
+                    if (max_past_brick > diff) {
+                        bricks += max_past_brick;
+                        pq.poll();
+                        bricks -= diff;
+                        pq.offer(diff);
+                        ladders--;
+                    } else
+                        ladders--;
+                } else
+                    ladders--;
+            } else
+                break;
         }
-        cnt1 = 0;
-        cnt2 = 0;
-        List<Integer> ans = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            if (el1 == nums[i])
-                cnt1++;
-            if (el2 == nums[i])
-                cnt2++;
-        }
-        if (cnt1 > (n / 3))
-            ans.add(el1);
-        if (cnt2 > (n / 3))
-            ans.add(el2);
-        return ans;
+        return ind;
     }
 
     public static void main(String[] args) {
-        int[] nums = { 1, 2 };
+        int[] nums = { 4, 12, 2, 7, 3, 18, 20, 3, 19 };
         int[][] grid = { { 3, 1, 1 },
                 { 2, 5, 1 },
                 { 1, 5, 5 },
                 { 2, 1, 1 } };
-        int k = 4;
+        String[] words = { "abc", "car", "ada", "racecar", "cool" };
+        int k = 3;
         int n = 13;
+        int bricks = 10, ladders = 2;
         // String str = "Aabb";
         String str = "cccaaa";
         int low = 1000, high = 13000;
         System.out.println("Result: ");
         // String ans = minWindow(str, t);
-        System.out.println(majorityElement(nums));
+        System.out.println(furthestBuilding(nums, bricks, ladders));
         // int[][] ans = maxSumAfterPartitioning(nums, k);
+        // int[] ans = rearrangeArray(nums);
         // List<Integer> ans = sequentialDigits(low, high);
-        // System.out.print(ans);
+        // System.out.print(Arrays.toString(ans));
         // for (int[] is : ans) {
         // for (int is2 : is) {
         // System.out.print(is2 + " ");
