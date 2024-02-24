@@ -62,4 +62,21 @@ public class ch_04_priorityQueue {
         }
 
     }
+
+    // custom PQ, with custom ordering method
+    public static class pair implements Comparable<pair> {
+        long meetingEndTime;
+        int roomNo;
+
+        public pair(long m, int r) {
+            meetingEndTime = m;
+            roomNo = r;
+        }
+
+        public int compareTo(pair other) {
+            // Compare elements based on priority
+            return this.meetingEndTime == other.meetingEndTime ? Long.compare(this.roomNo, other.roomNo)
+                    : Long.compare(this.meetingEndTime, other.meetingEndTime);
+        }
+    }
 }
