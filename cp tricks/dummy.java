@@ -23,43 +23,23 @@ public class dummy {
         }
     }
 
-    public static int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-        int m = flights.length;
-        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            adj.add(new ArrayList<>());
-        }
-        for (int i = 0; i < m; i++) {
-            int from = flights[i][0];
-            int to = flights[i][1];
-            int weight = flights[i][2];
+    public static int maxDepth(TreeNode root) {
+        if (root == null)
+            return 0;
+        int leftHeight = maxDepth(root.left);
+        int rightHeight = maxDepth(root.right);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
 
-            adj.get(from).add(new Pair(to, weight));
-        }
-        int[] dist = new int[n];
-        Arrays.fill(dist, (int) 1e9);
-        Queue<Tuple> que = new LinkedList<>();
-        que.offer(new Tuple(0, src, 0));
-        while (!que.isEmpty()) {
-            Tuple tp = que.poll();
-            int steps = tp.first;
-            int node = tp.second;
-            int d1 = tp.third;
-            if (steps > k)
-                continue;
-            for (Pair p : adj.get(node)) {
-                int v = p.first;
-                int d2 = p.second;
-                if (steps <= k && d1 + d2 < dist[v]) {
-                    dist[v] = d1 + d2;
-                    que.offer(new Tuple(steps + 1, v, d1 + d2));
-                }
-            }
-        }
-        if (dist[dst] == (int) 1e9)
-            return -1;
-        else
-            return dist[dst];
+    public static int diameterOfBinaryTree(TreeNode root) {
+        if (root == null)
+            return 0;
+        int lt = maxDepth(root.left);
+        int rt = maxDepth(root.right);
+        int ct = lt + rt;
+        int leftDiameter = diameterOfBinaryTree(root.left);
+        int rightDiameter = diameterOfBinaryTree(root.right);
+        return Math.max(ct, Math.max(leftDiameter, rightDiameter));
     }
 
     public static void main(String[] args) {

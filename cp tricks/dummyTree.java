@@ -20,10 +20,23 @@ public class dummyTree {
         }
     }
 
-    public static boolean isSameTree(TreeNode p, TreeNode q) {
-        if (p == null || q == null)
-            return (p == q);
-        return (p.val == q.val) && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    public static int maxHeight(TreeNode root) {
+        if (root == null)
+            return 0;
+        int leftHeight = maxHeight(root.left);
+        int rightHeight = maxHeight(root.right);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    public static int diameterOfBinaryTree(TreeNode root) {
+        if (root == null)
+            return 0;
+        int lt = maxHeight(root.left);
+        int rt = maxHeight(root.right);
+        int ct = lt + rt;
+        int leftDiameter = diameterOfBinaryTree(root.left);
+        int rightDiameter = diameterOfBinaryTree(root.right);
+        return Math.max(ct, Math.max(leftDiameter, rightDiameter));
     }
 
     public static void main(String[] args) {
@@ -35,10 +48,10 @@ public class dummyTree {
         root.left.right = new TreeNode(1);
         root.right.right = new TreeNode(1);
 
-        TreeNode root2 = null;
-        root2 = new TreeNode(2);
-        root2.left = new TreeNode(3);
+        // TreeNode root2 = null;
+        // root2 = new TreeNode(2);
+        // root2.left = new TreeNode(3);
         System.out.print("Result: ");
-        System.out.print(isSameTree(root, root2));
+        System.out.print(diameterOfBinaryTree(root));
     }
 }
