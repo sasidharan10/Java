@@ -39,17 +39,14 @@ public class dummyLL {
         System.out.println();
     }
 
-    public static boolean hasCycle(ListNode head) {
-        ListNode slow = head;
-        ListNode fast = head;
-
+    public static ListNode middleNode(ListNode head) {
+        ListNode slow, fast;
+        slow = fast = head;
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
-            if (slow == fast)
-                return true;
         }
-        return false;
+        return slow;
     }
 
     public static void main(String[] args) {
@@ -58,8 +55,7 @@ public class dummyLL {
         head = InsertEnd(head, 0);
         head = InsertEnd(head, -4);
         printList(head);
-        head.next.next.next = head.next;
         System.out.print("Result: ");
-        System.out.print(hasCycle(head));
+        System.out.print(middleNode(head).val);
     }
 }
