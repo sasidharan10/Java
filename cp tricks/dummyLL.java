@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class dummyLL {
     public static class ListNode {
         int val;
@@ -39,23 +41,43 @@ public class dummyLL {
         System.out.println();
     }
 
-    public static ListNode middleNode(ListNode head) {
-        ListNode slow, fast;
-        slow = fast = head;
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
+    public static ListNode removeZeroSumSublists(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        int prefixSum = 0;
+        HashMap<Integer, ListNode> mp = new HashMap<>();
+        mp.put(0, dummy);
+        while (head != null) {
+            prefixSum += head.val;
+            if (mp.containsKey(prefixSum)) {
+                ListNode start = mp.get(prefixSum);
+                ListNode temp = start;
+                int pSum = prefixSum;
+
+                temp = temp.next;
+                while (temp != head) {
+                    pSum += temp.val;
+                    mp.remove(pSum);
+                    temp = temp.next;
+                }
+                start.next = temp.next;
+            } else {
+                mp.put(prefixSum, head);
+            }
+            head = head.next;
         }
-        return slow;
+        return dummy.next;
     }
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(3);
+        ListNode head = new ListNode(8);
         head = InsertEnd(head, 2);
-        head = InsertEnd(head, 0);
-        head = InsertEnd(head, -4);
+        head = InsertEnd(head, -3);
+        head = InsertEnd(head, 3);
+        head = InsertEnd(head, 1);
         printList(head);
         System.out.print("Result: ");
-        System.out.print(middleNode(head).val);
+        head = removeZeroSumSublists(head);
+        printList(head);
     }
 }
