@@ -19,6 +19,12 @@ public class moreOnCollections {
         ans.add(3);
         int[] arr = ans.stream().mapToInt(Integer::intValue).toArray();
         System.out.println(Arrays.toString(arr));
-
+        
+        // Sort a 2D array, based on first element
+        int[][] grid = { { 10, 16 }, { 2, 8 }, { 1, 6 }, { 7, 12 } };
+        Arrays.sort(grid, (a, b) -> Integer.compare(a[0], b[0]));
+        for (int[] it : grid) {
+            System.out.println(Arrays.toString(it));
+        }
     }
 }

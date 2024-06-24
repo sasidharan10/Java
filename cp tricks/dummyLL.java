@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Stack;
 
 public class dummyLL {
     public static class ListNode {
@@ -41,43 +42,47 @@ public class dummyLL {
         System.out.println();
     }
 
-    public static ListNode removeZeroSumSublists(ListNode head) {
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        int prefixSum = 0;
-        HashMap<Integer, ListNode> mp = new HashMap<>();
-        mp.put(0, dummy);
-        while (head != null) {
-            prefixSum += head.val;
-            if (mp.containsKey(prefixSum)) {
-                ListNode start = mp.get(prefixSum);
-                ListNode temp = start;
-                int pSum = prefixSum;
-
-                temp = temp.next;
-                while (temp != head) {
-                    pSum += temp.val;
-                    mp.remove(pSum);
-                    temp = temp.next;
-                }
-                start.next = temp.next;
-            } else {
-                mp.put(prefixSum, head);
-            }
-            head = head.next;
+    public static ListNode removeNodes(ListNode head) {
+        Stack<ListNode> st = new Stack<>();
+        ListNode current = head;
+        while (current != null) {
+            st.push(current);
+            current = current.next;
         }
-        return dummy.next;
+        int maxi = st.peek().val;
+        ListNode resulthead = st.peek();
+        ListNode newList = st.peek();
+        st.pop();
+        while (!st.isEmpty()) {
+            if (st.peek().val >= maxi) {
+                maxi = st.peek().val;
+                ListNode temp = st.peek();
+                temp.next = newList;
+                newList = temp;
+                resulthead = newList;
+            }
+            st.pop();
+        }
+        return resulthead;
     }
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(8);
-        head = InsertEnd(head, 2);
-        head = InsertEnd(head, -3);
-        head = InsertEnd(head, 3);
-        head = InsertEnd(head, 1);
-        printList(head);
+        ListNode list1 = new ListNode(5);
+        list1 = InsertEnd(list1, 2);
+        list1 = InsertEnd(list1, 13);
+        list1 = InsertEnd(list1, 3);
+        list1 = InsertEnd(list1, 8);
+
+        // ListNode list2 = new ListNode(1000000);
+        // list2 = InsertEnd(list2, 1000001);
+        // list2 = InsertEnd(list2, 1000002);
+        // list2 = InsertEnd(list2, 1000003);
+        // list2 = InsertEnd(list2, 1000004);
+        int a = 2, b = 5;
+        printList(list1);
+        // list1 = reverseList(list1);
         System.out.print("Result: ");
-        head = removeZeroSumSublists(head);
-        printList(head);
+        list1 = removeNodes(list1);
+        printList(list1);
     }
 }

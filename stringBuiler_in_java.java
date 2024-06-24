@@ -30,6 +30,13 @@ public class stringBuiler_in_java {
         s4.delete(5, 14);
         System.out.println(s4.toString()); // Output: Java Builder
 
+        // Char Deletion:
+
+        s4 = new StringBuilder("Java StringBuilder");
+        s4.deleteCharAt(s4.length() - 1);
+        s4.deleteCharAt(s4.length() - 1);
+        System.out.println(s4.toString()); // Output: Java StringBuilde
+
         // String Replacement:
 
         StringBuilder s5 = new StringBuilder("Java StringBuilder");

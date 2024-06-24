@@ -1,6 +1,19 @@
 import java.util.*;
 
 public class dummyTree {
+    public static class Pair {
+        TreeNode node;
+        String curr;
+
+        Pair() {
+        }
+
+        Pair(TreeNode node, String curr) {
+            this.node = node;
+            this.curr = curr;
+        }
+    }
+
     public static class TreeNode {
         int val;
         TreeNode left;
@@ -20,61 +33,55 @@ public class dummyTree {
         }
     }
 
-    public static boolean isEvenOddTree(TreeNode root) {
-        int lvl = 0;
-        Queue<TreeNode> que = new LinkedList<>();
-        que.offer(root);
-        TreeNode temp = new TreeNode();
-        while (!que.isEmpty()) {
-            int n = que.size();
-            int prev = -1;
-            while (n > 0) {
-                temp = que.poll();
-                if (lvl % 2 == 0) {
-                    if (temp.val % 2 == 0) {
-                        return false;
-                    }
-                    if (prev != -1 && prev >= temp.val)
-                        return false;
-                    else
-                        prev = temp.val;
+    public static void inorder(TreeNode root) {
+        if (root == null)
+            return;
+        inorder(root.left);
+        System.out.print(root.val + " ");
+        inorder(root.right);
+    }
 
-                } else {
-                    if (temp.val % 2 != 0) {
-                        return false;
-                    }
-                    if (prev != -1 && prev <= temp.val)
-                        return false;
-                    prev = temp.val;
-                }
-                if (temp.left != null)
-                    que.offer(temp.left);
-                if (temp.right != null)
-                    que.offer(temp.right);
-                n--;
+    public static String res;
+
+    public static String smallestFromLeaf(TreeNode root) {
+        res = "";
+        Queue<Pair> que = new LinkedList<>();
+        String temp = "";
+        temp += (char) ('a' + root.val);
+        que.offer(new Pair(root, temp));
+        while (!que.isEmpty()) {
+            Pair p = que.poll();
+            TreeNode node = p.node;
+            String curr = p.curr;
+            if (node.left == null && node.right == null) {
+                if (res.equals("") || res.compareTo(curr) > 0)
+                    res = curr;
             }
-            lvl++;
+            if (node.left != null) {
+                que.offer(new Pair(node.left, (char) ('a' + node.left.val) + curr));
+            }
+            if (node.right != null) {
+                que.offer(new Pair(node.right, (char) ('a' + node.right.val) + curr));
+            }
         }
-        return true;
+        return res;
     }
 
     public static void main(String[] args) {
         TreeNode root = null;
-        root = new TreeNode(1);
-        root.left = new TreeNode(10);
-        root.right = new TreeNode(4);
-        root.left.left = new TreeNode(3);
-        root.right.left = new TreeNode(7);
-        root.right.right = new TreeNode(9);
-        root.left.left.left = new TreeNode(12);
-        root.left.left.right = new TreeNode(8);
-        root.right.left.left = new TreeNode(6);
-        root.right.right.right = new TreeNode(2);
+        root = new TreeNode(25);
+        root.left = new TreeNode(1);
+        root.left.left = new TreeNode(0);
+        root.left.right = new TreeNode(0);
+        root.left.left.left = new TreeNode(1);
+        root.left.left.left.left = new TreeNode(0);
 
         // TreeNode root2 = null;
         // root2 = new TreeNode(2);
         // root2.left = new TreeNode(3);
-        System.out.print("Result: ");
-        System.out.print(isEvenOddTree(root));
+        System.out.print("Tree: ");
+        inorder(root);
+        System.out.print("\nResult: " + smallestFromLeaf(root));
+        // inorder(root);
     }
 }
