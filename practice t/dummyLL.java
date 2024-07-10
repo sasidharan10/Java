@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 public class dummyLL {
     public static class ListNode {
@@ -64,6 +63,35 @@ public class dummyLL {
             st.pop();
         }
         return resulthead;
+    }
+
+    public static int[] nodesBetweenCriticalPoints(ListNode head) {
+        ListNode prev = head;
+        ListNode curr = head.next;
+        int minDiff = Integer.MAX_VALUE;
+        int firstIndex = 0;
+        int prevIndex = 0;
+        int index = 2;
+        while (curr != null) {
+            if (curr.next != null) {
+                if ((prev.val > curr.val && curr.next.val > curr.val)
+                        || (prev.val < curr.val && curr.next.val < curr.val)) {
+                    if (firstIndex == 0) {
+                        firstIndex = index;
+                    } else {
+                        minDiff = Math.min(minDiff, index - prevIndex);
+                    }
+                    prevIndex = index;
+                }
+            }
+            index++;
+            prev = curr;
+            curr = curr.next;
+        }
+
+        if (minDiff == Integer.MAX_VALUE)
+            return new int[] { -1, -1 };
+        return new int[] { minDiff, prevIndex - firstIndex };
     }
 
     public static void main(String[] args) {

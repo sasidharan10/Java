@@ -14,6 +14,32 @@ public class dummy {
         }
     }
 
+    public static long maximumImportance(int n, int[][] roads) {
+        int m = roads.length;
+        int[] outDegree = new int[n];
+        for (int i = 0; i < m; i++) {
+            outDegree[roads[i][0]]++;
+            outDegree[roads[i][1]]++;
+        }
+
+        // Convert the int array to Integer array
+        Integer[] integerArray = Arrays.stream(outDegree).boxed().toArray(Integer[]::new);
+
+        // Sort the array in descending order
+        Arrays.sort(integerArray, Collections.reverseOrder());
+
+        // Convert the Integer array back to int array
+        outDegree = Arrays.stream(integerArray).mapToInt(Integer::intValue).toArray();
+
+        long res = 0;
+        long val = n;
+        for (int i = 0; i < n; i++) {
+            res += outDegree[i] * val;
+            val--;
+        }
+        return res;
+    }
+
     public static int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
         int n = profits.length;
         List<int[]> mp = new ArrayList<>();
@@ -29,7 +55,7 @@ public class dummy {
             }
         };
 
-        Collections.sort(mp, cmp);
+        // Collections.sort(mp, cmp);
         for (int[] is : mp) {
             for (int is2 : is) {
                 System.out.print(is2 + ", ");
@@ -53,45 +79,40 @@ public class dummy {
         return w;
     }
 
-    public static boolean canPlaceBalls(int m, int diff, int n, int[] position)
-    {
-        int cowCount = 1;
-        int lastPlaced = position[0];
-        for (int i = 1; i < n; i++)
-        {
-            if (position[i] - lastPlaced >= diff)
-            {
-                lastPlaced = position[i];
-                cowCount++;
+    public static int minOperations(String[] logs) {
+        int n = logs.length;
+        int depth = 0;
+        for (int i = 0; i < n; i++) {
+            if (logs[i].equals("./"))
+                continue;
+            else if (logs[i].equals("../")) {
+                if (depth > 0)
+                    depth--;
+            } else {
+                depth++;
             }
-            if (cowCount >= m)
-                return true;
         }
-        return false;
+        return depth;
     }
 
-    public int maxDistance(int[] position, int m)
-    {
+    public static int func() {
+        int m = 89945, k = 32127, sz = 10000;
+        int t = m *k;
+        System.out.println(t);
+        long temp = (long)m * k;
 
-        int n = position.length;
-        Arrays.sort(position);
-        int low = 1, high = position[n - 1] - position[0];
-        while (low <= high)
-        {
-            int mid = low + (high - low) / 2;
-            if (canPlaceBalls(m, mid, n, position))
-                low = mid + 1;
-            else
-                high = mid - 1;
-        }
-        return high;
+        if (sz < temp)
+        return -1;
+        // if (sz < ((long) m * k))
+        //     return -1;
+        return 0;
     }
 
     public static void main(String[] args) {
         int[] nums = { 1, 2, 3 };
         int[] nums2 = { 1, 1, 2 };
         int[][] grid = { { 0, 6, 0 }, { 5, 8, 7 }, { 0, 9, 0 } };
-        String[] words = { "bella", "label", "roller" };
+        String[] words = { "d1/", "d2/", "./", "d3/", "../", "d31/" };
         // char[] tasks = { 'A', 'A', 'A', 'B', 'B', 'B' };
         char[][] board = { { '1', '0', '1', '0', '0' }, { '1', '0', '1', '1', '1' }, { '1', '1', '1', '1', '1' },
                 { '1', '0', '0', '1', '0' } };
@@ -107,7 +128,7 @@ public class dummy {
         int low = 1000, high = 13000;
         System.out.println("Result: ");
         // String ans = minWindow(str, t);
-        // System.out.println(findMaximizedCapital(k, n, nums, nums2));
+        System.out.println(func());
         // int[][] ans = findFarmland(grid);
         // int[] ans = deckRevealedIncreasing(nums);
         // String[] ans = getMaximumGold(grid);
