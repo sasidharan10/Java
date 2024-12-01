@@ -6,7 +6,7 @@ public class randomInJava {
         int range = maxi - mini + 1;
         for (int i = 0; i < 10; i++) {
             int rand = (int) ((Math.random() * range) + mini);
-            System.out.println(rand);
+            System.out.print(rand + ", ");
         }
     }
 }

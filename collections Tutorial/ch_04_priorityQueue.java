@@ -61,6 +61,32 @@ public class ch_04_priorityQueue {
             System.out.print(pq.poll() + ", ");
         }
 
+        System.out.println("\n\nCustom sorting: ");
+
+        PriorityQueue<int[]> t1 = new PriorityQueue<>(new Comparator<int[]>() {
+            public int compare(int[] a, int[] b) {
+                return Integer.compare(a[0], b[0]); // ascending
+                // return Integer.compare(b[0], a[0]); // decending
+                // return Integer.compare(a[1], b[1]); // ascending, but sorts based on 2nd
+                // element.
+            }
+        });
+
+        t1.offer(new int[] { 9, 7 });
+        t1.offer(new int[] { 5, 2 });
+        t1.offer(new int[] { 3, 3 });
+        t1.offer(new int[] { 1, 1 });
+        t1.offer(new int[] { 6, 9 });
+        t1.offer(new int[] { 4, 4 });
+        t1.offer(new int[] { 2, 0 });
+
+        System.out.println("\nList: ");
+        while (!t1.isEmpty()) {
+            int it1 = t1.peek()[0];
+            int it2 = t1.peek()[1];
+            t1.poll();
+            System.out.println(it1 + " : " + it2);
+        }
     }
 
     // custom PQ, with custom ordering method

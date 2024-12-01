@@ -1,139 +1,170 @@
+
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class streamAPI {
-    public static void main(String[] args) {
-        // 1. filter()
-        // Filters the elements of the stream based on a given predicate.
-        System.out.println("\n1. filter(): ");
-        List<String> words = Arrays.asList("hello", "world", "java", "stream", "filter");
+        public static void main(String[] args) {
+                // Basics
 
-        words.stream()
-                .filter(word -> word.length() > 5)
-                .forEach(System.out::println); // Output: stream, filter
+                List<Integer> nums = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        // 2. map()
-        // Transforms each element of the stream using a given function.
-        System.out.println("\n2. map(): ");
-        words = Arrays.asList("hello", "world", "java", "stream");
+                Stream<Integer> data = nums.stream();
+                // running below command means, all elements will be flushed from "data".
+                // hence we use different streams(data1, data2 etc), to keep track of the elements.
+                // data.forEach(n -> System.out.print(n + ", "));
+                Stream<Integer> data2 = data.filter(n -> n % 2 == 0);
+                Stream<Integer> data3 = data2.map(n -> n * 2);
+                int data4 = data3.reduce(0, (a, b) -> a + b);
+                System.out.println("data: " + data4);
 
-        words.stream()
-                .map(String::toUpperCase)
-                .forEach(n -> System.out.print(n + ", ")); // Output: HELLO, WORLD, JAVA, STREAM
+                // 1. filter()
+                // Filters the elements of the stream based on a given predicate.
+                System.out.println("\n1. filter(): ");
+                List<String> words = Arrays.asList("hello", "world", "java", "stream", "filter");
 
-        // 3. flatMap()
-        // Flattens the resulting streams into a single stream.
-        System.out.println("\n\n3. flatMap(): ");
-        List<List<String>> listOfLists = Arrays.asList(
-                Arrays.asList("a", "b", "c"),
-                Arrays.asList("d", "e", "f"),
-                Arrays.asList("g", "h", "i"));
+                words.stream()
+                                .filter(word -> word.length() > 5)
+                                .forEach(System.out::println); // Output: stream, filter
 
-        listOfLists.stream()
-                .flatMap(List::stream)
-                .forEach(System.out::print); // Output: a, b, c, d, e, f, g, h, i
+                // 2. map()
+                // Transforms each element of the stream using a given function.
+                System.out.println("\n2. map(): ");
+                words = Arrays.asList("hello", "world", "java", "stream");
 
-        // 4. distinct()
-        // Returns a stream with unique elements (removes duplicates).
-        System.out.println("\n\n4. distinct(): ");
-        List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 4, 4, 5);
+                words.stream()
+                                .map(String::toUpperCase)
+                                .forEach(n -> System.out.print(n + ", ")); // Output: HELLO, WORLD, JAVA, STREAM
 
-        numbers.stream()
-                .distinct()
-                .forEach(System.out::print); // Output: 1, 2, 3, 4, 5
+                // 3. flatMap()
+                // Flattens the resulting streams into a single stream.
+                System.out.println("\n\n3. flatMap(): ");
+                List<List<String>> listOfLists = Arrays.asList(
+                                Arrays.asList("a", "b", "c"),
+                                Arrays.asList("d", "e", "f"),
+                                Arrays.asList("g", "h", "i"));
 
-        // 5. sorted()
-        // Returns a stream with elements sorted in natural order or using a custom
-        // comparator.
-        System.out.println("\n\n5. sorted(): ");
-        numbers = Arrays.asList(5, 3, 7, 1, 2, 9, 8, 3, 6, 4);
+                listOfLists.stream()
+                                .flatMap(List::stream)
+                                .forEach(System.out::print); // Output: a, b, c, d, e, f, g, h, i
 
-        words.stream()
-                .sorted()
-                .forEach(n -> System.out.print(n + ", ")); // Output: apple, banana, grape, orange
+                // 4. distinct()
+                // Returns a stream with unique elements (removes duplicates).
+                System.out.println("\n\n4. distinct(): ");
+                List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 4, 4, 5);
 
-        // 6. limit()
-        // Returns a stream with a maximum number of elements.
-        System.out.println("\n\n6. limit(): ");
-        numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+                numbers.stream()
+                                .distinct()
+                                .forEach(System.out::print); // Output: 1, 2, 3, 4, 5
 
-        numbers.stream()
-                .limit(5)
-                .forEach(n -> System.out.print(n + ", ")); // Output: 1, 2, 3, 4, 5
+                // 5. sorted()
+                // Returns a stream with elements sorted in natural order or using a custom
+                // comparator.
+                System.out.println("\n\n5. sorted(): ");
+                numbers = Arrays.asList(5, 3, 7, 1, 2, 9, 8, 3, 6, 4);
 
-        // 7. skip()
-        // Returns a stream with the first n elements discarded.
-        System.out.println("\n\n7. skip(): ");
-        numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+                words.stream()
+                                .sorted()
+                                .forEach(n -> System.out.print(n + ", ")); // Output: apple, banana, grape, orange
 
-        numbers.stream()
-                .skip(5)
-                .forEach(n -> System.out.print(n + ", ")); // Output: 6, 7, 8, 9, 10
+                // 6. limit()
+                // Returns a stream with a maximum number of elements.
+                System.out.println("\n\n6. limit(): ");
+                numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-        // 8. collect()
-        // Converts the stream to a different form, often a collection.
-        System.out.println("\n\n8. collect(): ");
-        words = Arrays.asList("apple", "banana", "cherry", "apple");
+                numbers.stream()
+                                .limit(5)
+                                .forEach(n -> System.out.print(n + ", ")); // Output: 1, 2, 3, 4, 5
 
-        Set<String> wordSet = words.stream()
-                .collect(Collectors.toSet());
+                // 7. skip()
+                // Returns a stream with the first n elements discarded.
+                System.out.println("\n\n7. skip(): ");
+                numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-        wordSet.forEach(n -> System.out.print(n + ", ")); // Output: apple, banana, cherry
+                numbers.stream()
+                                .skip(5)
+                                .forEach(n -> System.out.print(n + ", ")); // Output: 6, 7, 8, 9, 10
 
-        // 9. reduce()
-        // Performs a reduction on the elements of the stream using an associative
-        // accumulation function.
-        System.out.println("\n\n9. reduce(): ");
+                // 8. collect()
+                // Converts the stream to a different form, often a collection.
+                System.out.println("\n\n8. collect(): ");
+                words = Arrays.asList("apple", "banana", "cherry", "apple");
 
-        numbers = Arrays.asList(1, 2, 3, 4, 5);
+                Set<String> wordSet = words.stream()
+                                .collect(Collectors.toSet());
 
-        int sum = numbers.stream()
-                .reduce(0, Integer::sum);
+                wordSet.forEach(n -> System.out.print(n + ", ")); // Output: apple, banana, cherry
 
-        System.out.println("Sum: " + sum); // Output: Sum: 15
+                // 9. reduce()
+                // Performs a reduction on the elements of the stream using an associative
+                // accumulation function.
+                System.out.println("\n\n9. reduce(): ");
 
-        // 10. forEach()
-        // Performs an action for each element of the stream.
-        System.out.println("\n10. forEach(): ");
+                numbers = Arrays.asList(1, 2, 3, 4, 5);
 
-        words = Arrays.asList("hello", "world", "java", "stream");
+                int sum = numbers.stream()
+                                .reduce(0, Integer::sum);
 
-        words.stream()
-                .forEach(n -> System.out.print(n + ", ")); // Output: hello, world, java, stream
+                System.out.println("Sum: " + sum); // Output: Sum: 15
 
-        // 11.Boxed
-        // The boxed() method is used to convert an IntStream to a Stream<Integer>
+                // 10. forEach()
+                // Performs an action for each element of the stream.
+                System.out.println("\n10. forEach(): ");
 
-        System.out.println("\n\n11. boxed(): ");
-        int[] array = { 5, 3, 8, 1, 9, 2 };
+                words = Arrays.asList("hello", "world", "java", "stream");
 
-        int[] sortedArray = Arrays.stream(array)
-                .boxed()
-                .sorted(Collections.reverseOrder())
-                .mapToInt(Integer::intValue)
-                .toArray();
+                words.stream()
+                                .forEach(n -> System.out.print(n + ", ")); // Output: hello, world, java, stream
 
-        System.out.println(Arrays.toString(sortedArray));
+                // 11.Boxed
+                // The boxed() method is used to convert an IntStream to a Stream<Integer>
+                // It is necessary if we are working with primitive arrays.
+                // for collections, its not needed.
 
-    }
+                System.out.println("\n\n11. boxed(): ");
+                int[] array = { 5, 3, 8, 1, 9, 2 };
+
+                int[] sortedArray = Arrays.stream(array)
+                                .boxed()
+                                .sorted(Collections.reverseOrder())
+                                .mapToInt(Integer::intValue)
+                                .toArray();
+
+                System.out.println(Arrays.toString(sortedArray));
+
+                // for collections, we can directly apply the necessary methods
+                List<Integer> numbers2 = Arrays.asList(1, 2, 3, 4, 5);
+                sortedArray = numbers2.stream()
+                                .sorted(Collections.reverseOrder())
+                                .mapToInt(Integer::intValue)
+                                .toArray();
+
+                System.out.println(Arrays.toString(sortedArray));
+
+        }
 }
 
 /*
- 
- - There uses of Stream in Java are mentioned below:
- - Stream API is a way to express and process collections of objects.
- - Enable us to perform operations like filtering, mapping, reducing and
- sorting.
- 
-- The boxed() method in Java is used to convert an IntStream (which is a stream of primitive 
-  int values) to a Stream<Integer> (which is a stream of Integer objects).
-
-- Here's why you might need to use boxed() in the context of sorting an array in reverse order:
-
-- Primitive Streams: IntStream is a stream specifically for int primitives and does not support 
-operations that require object-based methods, such as using Comparator for sorting in reverse order.
-- Object-Based Operations: By converting the IntStream to a Stream<Integer> using boxed(), you 
-can then use object-based methods like sorted(Collections.reverseOrder()), which requires 
-objects rather than primitives.
-
+ * 
+ * - There uses of Stream in Java are mentioned below:
+ * - Stream API is a way to express and process collections of objects.
+ * - Enable us to perform operations like filtering, mapping, reducing and
+ * sorting.
+ * 
+ * - The boxed() method in Java is used to convert an IntStream (which is a
+ * stream of primitive int values) to a Stream<Integer> (which is a stream of
+ * Integer objects).
+ * 
+ * - Here's why you might need to use boxed() in the context of sorting an array
+ * in reverse order:
+ * 
+ * - Primitive Streams: IntStream is a stream specifically for int primitives
+ * and does not support operations that require object-based methods, such as
+ * using Comparator for
+ * sorting in reverse order.
+ * - Object-Based Operations: By converting the IntStream to a Stream<Integer>
+ * using boxed(), you can then use object-based methods like
+ * sorted(Collections.reverseOrder()),
+ * which requires objects rather than primitives.
+ * 
  */

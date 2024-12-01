@@ -63,3 +63,8 @@ public class stringBuiler_in_java {
 
     }
 }
+
+/*
+ * Object References: When you pass a StringBuilder (or any other object) to a method, 
+   the method receives a reference to the original object.
+ */

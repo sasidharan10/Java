@@ -41,31 +41,58 @@ public class dummyTree {
         inorder(root.right);
     }
 
-    public static void getNodes(TreeNode root, List<TreeNode> arr) {
+    public static TreeNode findLCA(TreeNode root, int s, int d) {
         if (root == null)
-            return;
-        getNodes(root.left, arr);
-        arr.add(root);
-        getNodes(root.right, arr);
-    }
-
-    public static TreeNode createBST(int low, int high, int n, List<TreeNode> arr) {
-        if (low > high)
             return null;
-        int mid = low + (high - low) / 2;
-        TreeNode root = arr.get(mid);
-        root.left = createBST(low, mid - 1, n, arr);
-        root.right = createBST(mid + 1, high, n, arr);
-        return root;
+        if (root == null || root.val == s || root.val == d)
+            return root;
+        TreeNode lt = findLCA(root.left, s, d);
+        TreeNode rt = findLCA(root.right, s, d);
+        if (rt == null)
+            return lt;
+        else if (lt == null)
+            return rt;
+        else
+            return root;
     }
 
-    public static TreeNode balanceBST(TreeNode root) {
-        List<TreeNode> arr = new ArrayList<>();
-        getNodes(root, arr);
-        int n = arr.size();
-        int low = 0, high = n - 1;
-        TreeNode newRoot = createBST(low, high, n, arr);
-        return newRoot;
+    public static StringBuilder findPath(TreeNode root, StringBuilder path, int target) {
+        if (root == null)
+            return new StringBuilder();
+        if (root.val == target) {
+            return new StringBuilder(path);
+        }
+        path.append('L');
+        StringBuilder lt = findPath(root.left, path, target);
+        path.deleteCharAt(path.length() - 1);
+        path.append('R');
+        StringBuilder rt = findPath(root.right, path, target);
+        path.deleteCharAt(path.length() - 1);
+        if (rt.isEmpty())
+            return lt;
+        else if (lt.isEmpty())
+            return rt;
+        else
+            return new StringBuilder();
+    }
+
+    public static String getDirections(TreeNode root, int startValue, int destValue) {
+
+        TreeNode lca = findLCA(root, startValue, destValue);
+
+        StringBuilder path = new StringBuilder();
+        StringBuilder source = findPath(lca, path, startValue);
+
+        StringBuilder path2 = new StringBuilder();
+        StringBuilder dest = findPath(lca, path2, destValue);
+
+        StringBuilder res = new StringBuilder();
+        int n = source.length();
+        for (int i = 0; i < n; i++) {
+            res.append('U');
+        }
+        res.append(dest);
+        return res.toString();
     }
 
     public static void main(String[] args) {
@@ -83,9 +110,10 @@ public class dummyTree {
         // root2.left = new TreeNode(3);
         System.out.print("Tree: ");
         inorder(root);
-        root = bstToGst(root);
-        System.out.print("\nTree: ");
-        inorder(root);
+        System.out.println();
+        System.out.println(getDirections(root, 1, 11));
+        // root = bstToGst(root);
+        // System.out.print("\nTree: ");
         // inorder(root);
     }
 }

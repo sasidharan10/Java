@@ -26,7 +26,7 @@ public class dummyDS {
             int ulp_v = findUParent(v);
             if (ulp_u == ulp_v)
                 return;
-            else if (size[ulp_u] > size[ulp_v]) {
+            if (size[ulp_u] > size[ulp_v]) {
                 parent[ulp_v] = ulp_u;
                 size[ulp_u] += size[ulp_v];
             } else {
@@ -41,40 +41,33 @@ public class dummyDS {
         }
     }
 
-    public static boolean canTraverseAllPairs(int[] nums) {
-        int n = nums.length;
+    public static int removeStones(int[][] stones)
+    {
+        // TC: O(^2) + alpha(n)
+        // SC: O(n)
+        
+        int n = stones.length;
         disjointSet ds = new disjointSet(n);
-        HashMap<Integer, Integer> mp = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            int temp = nums[i];
-            for (int factor = 2; factor * factor <= nums[i]; factor++) {
-                if (temp % factor != 0)
-                    continue;
-                if (mp.containsKey(factor)) {
-                    int idx = mp.get(factor);
-                    ds.unionBySize(idx, i);
-                } else
-                    mp.put(factor, i);
-
-                while (temp % factor == 0) {
-                    temp /= factor;
-                }
-            }
-            if (temp > 1) {
-                if (mp.containsKey(temp)) {
-                    int idx = mp.get(temp);
-                    ds.unionBySize(idx, i);
-                } else {
-                    mp.put(temp, i);
-                }
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i + 1; j < n; j++)
+            {
+                if (stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1])
+                    ds.unionBySize(i, j);
             }
         }
-        return ds.getNoOfComponents() == 1;
+        int groups = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (ds.parent[i] == i)
+                groups++;
+        }
+        return n - groups;
     }
 
     public static void main(String[] args) {
         int[] nums = { 4, 3, 12, 8 };
         // int[] nums = { 3, 9, 5 };
-        System.out.println(canTraverseAllPairs(nums));
+        // System.out.println(removeStones(nums));
     }
 }

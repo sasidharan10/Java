@@ -41,57 +41,29 @@ public class dummyLL {
         System.out.println();
     }
 
-    public static ListNode removeNodes(ListNode head) {
-        Stack<ListNode> st = new Stack<>();
-        ListNode current = head;
-        while (current != null) {
-            st.push(current);
-            current = current.next;
+    public static int findGCD(int a, int b) {
+        while (b != 0) {
+            int rem = a % b;
+            a = b;
+            b = rem;
         }
-        int maxi = st.peek().val;
-        ListNode resulthead = st.peek();
-        ListNode newList = st.peek();
-        st.pop();
-        while (!st.isEmpty()) {
-            if (st.peek().val >= maxi) {
-                maxi = st.peek().val;
-                ListNode temp = st.peek();
-                temp.next = newList;
-                newList = temp;
-                resulthead = newList;
-            }
-            st.pop();
-        }
-        return resulthead;
+        return a;
     }
 
-    public static int[] nodesBetweenCriticalPoints(ListNode head) {
-        ListNode prev = head;
-        ListNode curr = head.next;
-        int minDiff = Integer.MAX_VALUE;
-        int firstIndex = 0;
-        int prevIndex = 0;
-        int index = 2;
-        while (curr != null) {
-            if (curr.next != null) {
-                if ((prev.val > curr.val && curr.next.val > curr.val)
-                        || (prev.val < curr.val && curr.next.val < curr.val)) {
-                    if (firstIndex == 0) {
-                        firstIndex = index;
-                    } else {
-                        minDiff = Math.min(minDiff, index - prevIndex);
-                    }
-                    prevIndex = index;
-                }
-            }
-            index++;
-            prev = curr;
-            curr = curr.next;
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        if (head.next == null)
+            return head;
+        ListNode first = head;
+        ListNode second = head.next;
+        while (second != null) {
+            int temp = findGCD(first.val, second.val);
+            ListNode middle = new ListNode(temp);
+            first.next = middle;
+            middle.next = second;
+            first = second;
+            second = second.next;
         }
-
-        if (minDiff == Integer.MAX_VALUE)
-            return new int[] { -1, -1 };
-        return new int[] { minDiff, prevIndex - firstIndex };
+        return head;
     }
 
     public static void main(String[] args) {
@@ -110,7 +82,7 @@ public class dummyLL {
         printList(list1);
         // list1 = reverseList(list1);
         System.out.print("Result: ");
-        list1 = removeNodes(list1);
+        // list1 = removeNodes(list1);
         printList(list1);
     }
 }

@@ -8,7 +8,13 @@ public class sorting_2d_arr {
                 { 1, 5, 3 },
                 { 9, 8, 7 }
         };
+        System.out.println("2D array: ");
+        // To sort elements in each row
+        // for (int i = 0; i < twoDArray.length; i++) {
+        //     Arrays.sort(twoDArray[i]);
+        // }
 
+        // To sort the rows based of itss first element.
         Arrays.sort(twoDArray, (a, b) -> Integer.compare(a[0], b[0]));
         // Arrays.sort(twoDArray, (a, b) -> Integer.compare(b[0], a[0])); // for reverse
         for (int[] is : twoDArray) {
@@ -16,6 +22,30 @@ public class sorting_2d_arr {
                 System.out.print(is2 + " ");
             }
             System.out.println();
+        }
+
+        // List of array
+
+        List<int[]> lt = new ArrayList<>();
+        lt.add(new int[] { 9, 7 });
+        lt.add(new int[] { 5, 2 });
+        lt.add(new int[] { 3, 3 });
+        lt.add(new int[] { 1, 1 });
+        lt.add(new int[] { 6, 9 });
+        lt.add(new int[] { 4, 4 });
+        lt.add(new int[] { 2, 0 });
+
+        Collections.sort(lt, new Comparator<int[]>() {
+            public int compare(int[] a, int[] b) {
+                // return Integer.compare(a[0], b[0]); // ascending
+                // return Integer.compare(b[0], a[0]); // decending
+                return Integer.compare(a[1], b[1]); // ascending, but sorts based on 2nd
+                // element.
+            }
+        });
+        System.out.println("List of array: ");
+        for (int[] it : lt) {
+            System.out.println(it[0] + " : " + it[1]);
         }
 
         // 2D ArrayList:

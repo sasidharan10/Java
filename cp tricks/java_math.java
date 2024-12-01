@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class java_math {
     public static void main(String[] args) {
         int i = -7;
