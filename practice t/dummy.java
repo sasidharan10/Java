@@ -1,41 +1,26 @@
 import java.util.*;
 
 public class dummy {
-    public static void dfs(int node, List<List<Integer>> adj, int[] vis) {
-        vis[node] = 1;
-        // if (adj.get(node) == null)
-        //     return;
-        for (int nbr : adj.get(node)) {
-            if (vis[nbr] == 0)
-                dfs(nbr, adj, vis);
-        }
-    }
 
-    public static int findCircleNum(int[][] isConnected) {
-        // TC: ~O(n) or O(n) + O(n + 2E)
-        // SC: O(n) + (n)
+    public static int[] getModifiedArray(int length, int[][] updates) {
+        // TC: O(n + length)
+        // SC: O(length)
 
-        int n = isConnected.length;
-        List<List<Integer>> adj = new ArrayList<>();
+        int n = updates.length;
+        int[] cumSum = new int[length];
         for (int i = 0; i < n; i++) {
-            adj.add(new ArrayList<>());
+            int start = updates[i][0];
+            int end = updates[i][1];
+            int inc = updates[i][2];
+            cumSum[start] += inc;
+            if (end + 1 < length)
+                cumSum[end + 1] -= inc;
         }
-        int[] vis = new int[n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (isConnected[i][j] == 1 && i != j) {
-                    adj.get(i).add(j);
-                }
-            }
+        // finding the cummulative sum
+        for (int i = 1; i < length; i++) {
+            cumSum[i] += cumSum[i - 1];
         }
-        int cnt = 0;
-        for (int i = 0; i < n; i++) {
-            if (vis[i] == 0) {
-                cnt++;
-                dfs(i, adj, vis);
-            }
-        }
-        return cnt;
+        return cumSum;
     }
 
     public static void main(String[] args) {
