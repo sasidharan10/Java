@@ -1,26 +1,49 @@
 import java.util.*;
 
 public class dummy {
+    public static class Pair {
+        private int first;
+        private int second;
 
-    public static int[] getModifiedArray(int length, int[][] updates) {
-        // TC: O(n + length)
-        // SC: O(length)
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
 
-        int n = updates.length;
-        int[] cumSum = new int[length];
+    public int maxAscendingSum(int[] nums) {
+        int n = nums.length;
+        int maxi = nums[0];
+        int sum = nums[0];
+        for (int i = 1; i < n; i++) {
+            if (nums[i - 1] < nums[i]) {
+                sum += nums[i];
+            } else
+                sum = nums[i];
+            maxi = Math.max(maxi, sum);
+        }
+        return maxi;
+    }
+
+    public String clearDigits(String s) {
+        int n = s.length();
+        Stack<Character> st = new Stack<>();
         for (int i = 0; i < n; i++) {
-            int start = updates[i][0];
-            int end = updates[i][1];
-            int inc = updates[i][2];
-            cumSum[start] += inc;
-            if (end + 1 < length)
-                cumSum[end + 1] -= inc;
+            int ch = s.charAt(i) - '0';
+            if (ch >= 0 && ch <= 9) {
+                if (!st.empty())
+                    st.pop();
+            } else {
+                st.push(s.charAt(i));
+            }
         }
-        // finding the cummulative sum
-        for (int i = 1; i < length; i++) {
-            cumSum[i] += cumSum[i - 1];
+        StringBuilder res = new StringBuilder();
+        while (!st.empty()) {
+            res.append(st.peek());
+            st.pop();
         }
-        return cumSum;
+        res.reverse();
+        return res.toString();
     }
 
     public static void main(String[] args) {
