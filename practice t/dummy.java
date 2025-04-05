@@ -11,18 +11,56 @@ public class dummy {
         }
     }
 
-    public int maxAscendingSum(int[] nums) {
-        int n = nums.length;
-        int maxi = nums[0];
-        int sum = nums[0];
-        for (int i = 1; i < n; i++) {
-            if (nums[i - 1] < nums[i]) {
-                sum += nums[i];
-            } else
-                sum = nums[i];
-            maxi = Math.max(maxi, sum);
+    public static List<String> findAllRecipes(String[] recipes, List<List<String>> ingredients, String[] supplies) {
+        int n = recipes.length;
+        HashMap<String, List<String>> adj = new HashMap<>();
+        HashMap<String, Integer> inDegree = new HashMap<>();
+        List<String> res = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            String recipe = recipes[i];
+            inDegree.put(recipe, ingredients.get(i).size());
+
+            for (int j = 0; j < ingredients.get(i).size(); j++) {
+                adj.computeIfAbsent(ingredients.get(i).get(j), x -> new ArrayList<>()).add(recipe);
+            }
         }
-        return maxi;
+        Queue<String> que = new LinkedList<>();
+        for (int i = 0; i < supplies.length; i++) {
+            que.offer(supplies[i]);
+        }
+        while (!que.isEmpty()) {
+            String item = que.poll();
+
+            if (!adj.containsKey(item))
+                continue;
+
+            for (String nbr : adj.get(item)) {
+                inDegree.put(nbr, inDegree.get(nbr) - 1);
+                if (inDegree.get(nbr) == 0) {
+                    res.add(nbr);
+                    que.offer(nbr);
+                }
+            }
+        }
+        return res;
+    }
+
+    public static long solveMem(int ind, int n, int[][] questions, long[] dp) {
+        if (ind >= n) {
+            return 0;
+        }
+        if (dp[ind] != -1)
+            return dp[ind];
+        long take = questions[ind][0] + solveMem(ind + questions[ind][1] + 1, n, questions, dp);
+        long notTake = solveMem(ind + 1, n, questions, dp);
+        return dp[ind] = Math.max(take, notTake);
+    }
+
+    public static long mostPoints(int[][] questions) {
+        int n = questions.length;
+        long[] dp = new long[n];
+        Arrays.fill(dp, -1);
+        return solveMem(0, n, questions, dp);
     }
 
     public String clearDigits(String s) {

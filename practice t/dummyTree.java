@@ -41,58 +41,33 @@ public class dummyTree {
         inorder(root.right);
     }
 
-    public static TreeNode findLCA(TreeNode root, int s, int d) {
-        if (root == null)
+    public static int ind;
+
+    public static TreeNode solve(int preStart, int preEnd, int inStart, int inEnd, int[] preorder, int[] inorder,
+            Map<Integer, Integer> mp) {
+        if (inStart > inEnd)
             return null;
-        if (root == null || root.val == s || root.val == d)
-            return root;
-        TreeNode lt = findLCA(root.left, s, d);
-        TreeNode rt = findLCA(root.right, s, d);
-        if (rt == null)
-            return lt;
-        else if (lt == null)
-            return rt;
-        else
-            return root;
+
+        int rootVal = preorder[preStart];
+        TreeNode root = new TreeNode(rootVal);
+
+        int i = mp.get(rootVal);
+        int leftSize = i - inStart;
+        int rightSize = inEnd - i;
+
+        root.left = solve(preStart + 1, preStart + leftSize, inStart, i - 1, preorder, inorder, mp);
+        root.right = solve(preEnd - rightSize + 1, preEnd, i + 1, inEnd, preorder, inorder, mp);
+        return root;
     }
 
-    public static StringBuilder findPath(TreeNode root, StringBuilder path, int target) {
-        if (root == null)
-            return new StringBuilder();
-        if (root.val == target) {
-            return new StringBuilder(path);
-        }
-        path.append('L');
-        StringBuilder lt = findPath(root.left, path, target);
-        path.deleteCharAt(path.length() - 1);
-        path.append('R');
-        StringBuilder rt = findPath(root.right, path, target);
-        path.deleteCharAt(path.length() - 1);
-        if (rt.isEmpty())
-            return lt;
-        else if (lt.isEmpty())
-            return rt;
-        else
-            return new StringBuilder();
-    }
-
-    public static String getDirections(TreeNode root, int startValue, int destValue) {
-
-        TreeNode lca = findLCA(root, startValue, destValue);
-
-        StringBuilder path = new StringBuilder();
-        StringBuilder source = findPath(lca, path, startValue);
-
-        StringBuilder path2 = new StringBuilder();
-        StringBuilder dest = findPath(lca, path2, destValue);
-
-        StringBuilder res = new StringBuilder();
-        int n = source.length();
+    public static TreeNode buildTree(int[] preorder, int[] inorder) {
+        int n = inorder.length;
+        Map<Integer, Integer> mp = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            res.append('U');
+            mp.put(inorder[i], i);
         }
-        res.append(dest);
-        return res.toString();
+        TreeNode root = solve(0, n - 1, 0, n - 1, preorder, inorder, mp);
+        return root;
     }
 
     public static void main(String[] args) {
@@ -111,7 +86,6 @@ public class dummyTree {
         System.out.print("Tree: ");
         inorder(root);
         System.out.println();
-        System.out.println(getDirections(root, 1, 11));
         // root = bstToGst(root);
         // System.out.print("\nTree: ");
         // inorder(root);
